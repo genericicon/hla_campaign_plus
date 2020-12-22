@@ -1,0 +1,83 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc28:version{fb63b6ca-f435-4aa0-a2c7-c66ddc651dca} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models\\dmx\\mesh\\pl_armor_stom.dmx"
+						import_scale = 1.0
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsHullFromRender"
+						parent_bone = ""
+						surface_prop = "npc_combine_hand_shield"
+						collision_prop = "default"
+						faceMergeAngle = 20.0
+						maxHullVertices = 32
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "MaterialGroup"
+						name = "Red"
+						note = "Type note..."
+						remaps = 
+						[
+							{
+								from = "materials/particle/fluids/combine_shield_plasma.vmat"
+								to = "materials/particle/fluids/rapid_fire_plasma_energized.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "Antlion"
+						remaps = 
+						[
+							{
+								from = "materials/particle/fluids/combine_shield_plasma.vmat"
+								to = "materials/particle/fluids/spore_plasma.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "Flicker"
+						remaps = 
+						[
+							{
+								from = "materials/particle/fluids/combine_shield_plasma.vmat"
+								to = "materials/particle/fluids/combine_shield_mounted_gun_plasma.vmat"
+							},
+						]
+					},
+				]
+			},
+		]
+		model_archetype = "animated_model"
+		primary_associated_entity = "prop_dynamic"
+		anim_graph_name = ""
+	}
+}

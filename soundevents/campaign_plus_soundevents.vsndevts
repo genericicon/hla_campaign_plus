@@ -1,0 +1,150 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+
+{
+	campaignplus.zombine_alert1 =
+    {
+        type = "hlvr_default_3d"
+        volume = 1.000000
+        use_hrtf = 1.000000
+        vsnd_files = 
+        [
+            "zombine_alert1.vsnd",
+			"zombine_alert2.vsnd",
+			"zombine_alert3.vsnd",
+			"zombine_alert4.vsnd",
+			"zombine_alert5.vsnd",
+			"zombine_alert6.vsnd",
+			"zombine_alert7.vsnd",
+			"grunt_zomb_sector.vsnd",
+			"zomb_grunt_outbreak.vsnd"
+        ]
+    }
+    campaignplus.zombine_charge1 =
+    {
+        type = "hlvr_default_3d"
+        volume = 1.000000
+        use_hrtf = 1.000000
+        vsnd_files = 
+        [
+            "zombine_charge1.vsnd",
+			"zombine_charge2.vsnd"
+        ]
+    }
+    campaignplus.zombine_die1 =
+    {
+        type = "hlvr_default_3d"
+        volume = 1.000000
+        use_hrtf = 1.000000
+        vsnd_files = 
+        [
+            "zombine_die1.vsnd",
+			"zombine_die2.vsnd",
+			"grunt_zomb_death.vsnd"
+        ]
+    }
+    campaignplus.zombine_idle1 =
+    {
+        type = "hlvr_default_3d"
+        volume = 1.000000
+        use_hrtf = 1.000000
+        vsnd_files = 
+        [
+			"zombine_idle1.vsnd",
+			"zombine_idle2.vsnd",
+			"zombine_idle3.vsnd",
+			"zombine_idle4.vsnd",
+			"grunt_zomb_neucrotic.vsnd",
+			"grunt_zomb_sector2.vsnd",
+			"help_us.vsnd"
+        ]
+    }
+    campaignplus.zombine_pain1 =
+    {
+        type = "hlvr_default_3d"
+        volume = 1.000000
+        use_hrtf = 1.000000
+        vsnd_files = 
+        [
+            "zombine_pain1.vsnd",
+			"zombine_pain2.vsnd",
+			"zombine_pain3.vsnd",
+			"zombine_pain4.vsnd"
+        ]
+    }
+    campaignplus.zombine_readygrenade1 =
+    {
+        type = "hlvr_default_3d"
+        volume = 1.000000
+        use_hrtf = 1.000000
+        vsnd_files = 
+        [
+            "zombine_readygrenade1.vsnd",
+			"zombine_readygrenade2.vsnd",
+			"grunt_zomb_move.vsnd",
+			"grunt_zomb_grenade.vsnd"
+        ]
+	}
+	campaignplus.zombine_breathing =
+	{
+		type = "hlvr_default_3d"
+		volume = 1.000000
+		use_hrtf = 1.000000
+		vsnd_files =
+		[
+			"grunt_zombbreathing_01.vsnd",
+		]
+	}
+	campaignplus.hlazombine_stimdose =
+	{
+		type = "hlvr_default_3d"
+		volume = 1.000000
+		use_hrtf = 1.000000
+		vsnd_files =
+		[
+			"grunt_zomb_stimdose.vsnd",
+			"zomb_grunt_survivalmark.vsnd"
+		]
+	}
+	campaignplus.hlazombine_medic =
+	{
+		type = "hlvr_default_3d"
+		volume = 1.000000
+		use_hrtf = 1.000000
+		vsnd_files =
+		[
+			"grunt_zomb_medic.vsnd",
+		]
+	}
+	campaignplus.shielddown =
+	{
+		type = "hlvr_default_3d"
+		volume = 1.000000
+		use_hrtf = 1.000000
+		vsnd_files = 
+		[
+			"charger_shieldreversedown.vsnd",
+		]
+	}
+	campaignplus.shieldup =
+	{
+		type = "hlvr_default_3d"
+		volume = 1.000000
+		use_hrtf = 1.000000
+		vsnd_files = 
+		[
+			"charger_shield_reverseup.vsnd",
+		]
+	}
+	campaignplus.flash = 
+	{
+		type = "hlvr_default_3d"
+		volume = 1.000000
+		use_hrtf = 1.000000
+		vsnd_files = 
+		[
+			"blinder.vsnd",
+			"strike.vsnd",
+			"wallhammer.vsnd"
+		]
+	}
+}
