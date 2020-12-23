@@ -16,5 +16,6 @@ In order for sounds to work go to your asset browser and recompile "campaign_plu
 You should be all set to use these prefabs in your own maps!
 
 If you end up using some of these prefabs in your map please credit me 
+
 I can be reached on Discord at generic_icon#0809
 
