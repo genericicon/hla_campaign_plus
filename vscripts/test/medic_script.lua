@@ -13,86 +13,139 @@ function Activate()
 
   combine = Entities:FindAllByClassnameWithin("npc_combine_s",thisEntity:GetAbsOrigin(), 2048)
 
-if unitmed[1] ~= nil then
+  if unitmed[1] ~= nil then
     unitmedic = unitmed[1]
     unitmedichealth = unitmedic:GetHealth()
     unitmedicmaxhealth = 125
-end
+  end
 
-if combine[1] ~= nil then
+  if (combine[1] ~= nil) and (combine[1] ~= unitmed[1]) then
    unit1 = combine[1]
    unit1health = unit1:GetHealth()
    unit1maxhealth = unit1:GetMaxHealth()
+  end 
+ 
+  if (combine[2] ~= nil) and (combine[2] ~= unitmed[1]) then
+    unit2 = combine[2]
+    unit2health = unit2:GetHealth()
+    unit2maxhealth = unit2:GetMaxHealth()
+  end 
+
+  if (combine[3] ~= nil) and (combine[3] ~= unitmed[1]) then
+    unit3 = combine[3]
+    unit3health = unit3:GetHealth()
+    unit3maxhealth = unit3:GetMaxHealth()
+  end 
+
+  if (combine[4] ~= nil) and (combine[4] ~= unitmed[1]) then
+    unit4 = combine[4]
+    unit4health = unit4:GetHealth()
+    unit4maxhealth = unit4:GetMaxHealth()
+  end 
+
+  if (combine[5] ~= nil) and (combine[5] ~= unitmed[1]) then
+   unit5 = combine[5]
+   unit5health = unit5:GetHealth()
+   unit5maxhealth = unit5:GetMaxHealth()
+  end 
+
+  if (combine[6] ~= nil) and (combine[6] ~= unitmed[1]) then
+   unit6 = combine[6]
+   unit6health = unit6:GetHealth()
+   unit6maxhealth = unit6:GetMaxHealth()
+  end 
+
+  if (combine[7] ~= nil) and (combine[7] ~= unitmed[1]) then
+   unit7 = combine[7]
+   unit7health = unit7:GetHealth()
+   unit7maxhealth = unit7:GetMaxHealth()
+  end 
+
+  if (combine[8] ~= nil) and (combine[8] ~= unitmed[1]) then
+   unit8 = combine[8]
+   unit8health = unit8:GetHealth()
+   unit8maxhealth = unit8:GetMaxHealth()
+  end 
+
 end 
  
-if combine[2] ~= nil then
-  unit2 = combine[2]
-  unit2health = unit2:GetHealth()
-  unit2maxhealth = unit2:GetMaxHealth()
-end 
 
-if combine[3] ~= nil then
-  unit3 = combine[3]
-  unit3health = unit3:GetHealth()
-  unit3maxhealth = unit3:GetMaxHealth()
+function SearchCyclical()
+  combine = Entities:FindAllByClassnameWithin("npc_combine_s",thisEntity:GetAbsOrigin(), 2048)
+
+  if unitmed[1] ~= nil then
+    unitmedic = unitmed[1]
+    unitmedichealth = unitmedic:GetHealth()
+    unitmedicmaxhealth = 125
+  end
+
+  if (combine[1] ~= nil) and (combine[1] ~= unitmed[1]) then
+   unit1 = combine[1]
+   unit1health = unit1:GetHealth()
+   unit1maxhealth = unit1:GetMaxHealth()
+  end 
+ 
+  if (combine[2] ~= nil) and (combine[2] ~= unitmed[1]) then
+    unit2 = combine[2]
+    unit2health = unit2:GetHealth()
+    unit2maxhealth = unit2:GetMaxHealth()
   end 
 
-if combine[4] ~= nil then
-  unit4 = combine[4]
-  unit4health = unit4:GetHealth()
-  unit4maxhealth = unit4:GetMaxHealth()
+  if (combine[3] ~= nil) and (combine[3] ~= unitmed[1]) then
+    unit3 = combine[3]
+    unit3health = unit3:GetHealth()
+    unit3maxhealth = unit3:GetMaxHealth()
   end 
 
-if combine[5] ~= nil then
-  unit5 = combine[5]
-  unit5health = unit5:GetHealth()
-  unit5maxhealth = unit5:GetMaxHealth()
+  if (combine[4] ~= nil) and (combine[4] ~= unitmed[1]) then
+    unit4 = combine[4]
+    unit4health = unit4:GetHealth()
+    unit4maxhealth = unit4:GetMaxHealth()
   end 
 
-if combine[6] ~= nil then
-  unit6 = combine[6]
-  unit6health = unit6:GetHealth()
-  unit6maxhealth = unit6:GetMaxHealth()
+  if (combine[5] ~= nil) and (combine[5] ~= unitmed[1]) then
+   unit5 = combine[5]
+   unit5health = unit5:GetHealth()
+   unit5maxhealth = unit5:GetMaxHealth()
   end 
 
-if combine[7] ~= nil then
-  unit7 = combine[7]
-  unit7health = unit7:GetHealth()
-  unit7maxhealth = unit7:GetMaxHealth()
+  if (combine[6] ~= nil) and (combine[6] ~= unitmed[1]) then
+   unit6 = combine[6]
+   unit6health = unit6:GetHealth()
+   unit6maxhealth = unit6:GetMaxHealth()
   end 
 
-if combine[8] ~= nil then
-  unit8 = combine[8]
-  unit8health = unit8:GetHealth()
-  unit8maxhealth = unit8:GetMaxHealth()
+  if (combine[7] ~= nil) and (combine[7] ~= unitmed[1]) then
+   unit7 = combine[7]
+   unit7health = unit7:GetHealth()
+   unit7maxhealth = unit7:GetMaxHealth()
   end 
 
-
+  if (combine[8] ~= nil) and (combine[8] ~= unitmed[1]) then
+   unit8 = combine[8]
+   unit8health = unit8:GetHealth()
+   unit8maxhealth = unit8:GetMaxHealth()
+  end 
 end
 
-
 function MedicSearchFunc()
+  unitmedic:SetThink(function() return SearchCyclical(unitmedic) end, "search", 1)
   bShouldRun = true
   flNavGoalTolerance = 25
   flMinNpcDist = 60
-  
-  --print ("thinking")
-
-
   --print (unit1, unit2, unit3, unit4, unit5, unit6, unit7, unit8, unitmedic)
-
   --print(unit1health, unit2health, unit3health, unit4health, unit5health, unit6health, unit7health, unit8health, unitmedichealth)
-if unitmedic ~= nil then
-unitmediclocation = unitmedic:GetAbsOrigin()
-end
+  if unitmedic ~= nil then
+  unitmediclocation = unitmedic:GetAbsOrigin()
+  end
 
 
-HealthCheck()
- NPCHealthPriority()
+  HealthCheck()
+  NPCHealthPriority()
   MedicChoice()
 
 
-  return healdelay
+   return healdelay
 end
 
 
@@ -248,23 +301,19 @@ function MedicRuntoUnit()
     unitmedic:NpcNavClearGoal()
     unitmedic:EmitSound("healthstation.complete")
     unitmedic:SetGraphParameter("b_signal",true)
-    unitmedic:SetThink(function() return SignalEnder(unitmedic) end, "signal", 3)
+    unitmedic:SetThink(function() return SignalEnder(unitmedic) end, "signal", 5)
       function SignalEnder(unitmedic)
         unitmedic:SetGraphParameter("b_signal",false)
         return nil
       end 
     hurtunit:SetHealth(hurtunitmaxhealth)
     hurtunit:SetGraphParameter("b_injured",false)
-    healdelay = healdelay + 2
-    
+    healdelay = healdelay + .25
   else
-    unitmedic:NpcForceGoPosition(critical, bShouldRun, flNavGoalTolerance)
-    return .1
+      unitmedic:NpcForceGoPosition(critical, bShouldRun, flNavGoalTolerance)
+      return .01
   end 
-  
 end
-
-
 
 
 
