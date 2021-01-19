@@ -1,5 +1,4 @@
 --Last script was an absolute mess, so hopefully this one is a bit better
-require "test/getDifficulty"
 
 local UnitsToHeal = {}
 local medic

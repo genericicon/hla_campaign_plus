@@ -1,59 +1,67 @@
+require "test/getDifficulty"
+
+local heals = 2
+local healdelay = 1
+local i = 1
+
+CheckDifficulty()
 
 function Spawn()
-    thisEntity:SetContextThink(nil, SelfHeal, 0)
+  thisEntity:SetContextThink(nil,UnitSelfHeal, 0)
 end
 
 function Activate()
-  heals = 2
-  healdelay = 2
-  unit = Entities:FindAllByClassnameWithin("npc_combine_s",thisEntity:GetAbsOrigin(), 1)
-  if unit[1] ~= nil then
-    thisunit = unit[1]
-    thisunithealth = thisunit:GetHealth()
-    thisunitmaxhealth = 125
-  end
-end 
-
-function SelfHeal()
-  if unit[1] ~= nil and heals ~= 0 then
-  HealthCheck()
-  else thisunit:EmitSound("HealthPen.Fail")
-    return nil
-  end
-    return healdelay
+  --print("armored" ..Difficulty)
 end
 
+function UnitSelfHeal()
 
-function HealthCheck()
-  thisunithealth = thisunit:GetHealth()
-  if thisunit ~= nil and thisunit:IsNull() ~= true then
-    percenthealth = (thisunithealth/thisunitmaxhealth)
-    --print(percenthealth)
-  end 
-  if percenthealth < .55 then
-    BeginHeal()
-  end
-end 
+ArGrunt = Entities:FindByClassnameNearest("npc_combine_s",thisEntity:GetAbsOrigin(),0)
+SpawnHP()
+--print("ArGrunt")
+  if ArGrunt:IsAlive() == true and heals ~= 0 then
+  CheckHP()
+    else ArGrunt:EmitSound("HealthPen.Fail")
+      thisEntity:StopThink("UnitSelfHeal")
+      return nil
+    end
+      return healdelay 
+end   
+  
+ 
+function CheckHP()
+  CurHealth = ArGrunt:GetHealth()
+  PerHealth = CurHealth/MaxHealth
+    --print(PerHealth)
+    if PerHealth < .55 then
+      BeginHeal()
+    end
+end
 
 function BeginHeal()
-
-  thisunit:EmitSound("HealthStation.Start")
-  thisunit:SetGraphParameter("b_signal",true)
-  thisunit:SetThink(function() return SignalEnder(thisunit) end, "signal", 1.5)
-  --print("signalling")
-      function SignalEnder(thisunit)
-   
-        thisunit:SetGraphParameter("b_signal",false)
-       --print("signal terminated")
-      
-       return nil
+  ArGrunt:EmitSound("HealthStation.Start")
+  ArGrunt:SetGraphParameter("b_signal",true)
+  ArGrunt:SetThink(function() return SignalEnder(ArGrunt) end, "signal", 1.5)
+      function SignalEnder(ArGrunt)
+        ArGrunt:SetGraphParameterBool("b_signal",false)
+        return nil
       end 
-  
-  thisunit:SetHealth(thisunitmaxhealth)
-  thisunit:SetGraphParameter("b_injured",false)
+  ArGrunt:SetHealth(MaxHealth)
+  ArGrunt:SetGraphParameterBool("b_injured",false)
   heals = heals - 1
   healdelay = healdelay + 5
-  --print(heals)
-    
 end
+
+
+
+function SpawnHP()
+  if i == 1 then                                                             --defaults are from campaign+ may not be vanilla values
+    if Difficulty == 3 then ArGrunt:SetHealth(125) MaxHealth = 125 i = 2 end --default is 80
+    if Difficulty == 2 then ArGrunt:SetHealth(125) MaxHealth = 125 i = 2 end --default is 80
+    if Difficulty == 1 then ArGrunt:SetHealth(72)  MaxHealth = 72 i = 2 end --default is 56
+    if Difficulty == 0 then ArGrunt:SetHealth(36) MaxHealth = 36 i = 2 end --default is 24
+  end 
+end
+
+
 

@@ -1,60 +1,63 @@
+require "test/getDifficulty"
+
+local heals = 2
+local healdelay = 1
+local i = 1
+
+CheckDifficulty()
 
 function Spawn()
-    thisEntity:SetContextThink(nil, SelfHeal, 0)
+  thisEntity:SetContextThink(nil,UnitSelfHeal, 0)
 end
 
 function Activate()
-  heals = 2
-  healdelay = 1
-  unit = Entities:FindAllByClassnameWithin("npc_zombie",thisEntity:GetAbsOrigin(), 1)
-  if unit[1] ~= nil then
-    thisunit = unit[1]
-    thisunithealth = thisunit:GetHealth()
-    thisunitmaxhealth = 100
-  end
-end 
-
-function SelfHeal()
-  if unit[1] ~= nil and heals ~= 0 then
-  HealthCheck()
-  else 
-    thisunit:EmitSound("campaignplus.hlazombine_medic") 
-    thisunit:EmitSound("HealthPen.Fail")
-    return nil
-  end
-    return healdelay
+  --print("zombie" ..Difficulty)
 end
 
+function UnitSelfHeal()
 
-function HealthCheck()
-  thisunithealth = thisunit:GetHealth()
-  if thisunit ~= nil and thisunit:IsNull() ~= true then
-    percenthealth = (thisunithealth/thisunitmaxhealth)
-    --print(percenthealth)
-  end 
-  if percenthealth < .55 then
-    BeginHeal()
-  end
-end 
+shzomb = Entities:FindByClassnameNearest("npc_zombie",thisEntity:GetAbsOrigin(),0)
+SpawnHP()
+--print("ShottyZombie")
+  if shzomb:IsAlive() == true and heals ~= 0 then
+  CheckHP()
+    else shzomb:EmitSound("campaignplus.hlazombine_medic")
+      thisEntity:StopThink("HealthPen.Fail")
+      return nil
+    end
+      return healdelay 
+end   
+  
+ 
+function CheckHP()
+  CurHealth = shzomb:GetHealth()
+  PerHealth = CurHealth/MaxHealth
+    --print(PerHealth)
+    if PerHealth < .55 then
+      BeginHeal()
+    end
+end
 
 function BeginHeal()
-  thisunit:EmitSound("campaignplus.hlazombine_stimdose") 
-  thisunit:EmitSound("HealthPen.Success01")
-  thisunit:SetGraphParameter("b_swat",true)
-  thisunit:SetThink(function() return SignalEnder(thisunit) end, "b_swat", 1.5)
-  --print("signalling")
-      function SignalEnder(thisunit)
-   
-        thisunit:SetGraphParameter("b_swat",false)
-       --print("signal terminated")
-      
-       return nil
+  shzomb:EmitSound("campaignplus.hlazombine_stimdose")
+  shzomb:SetGraphParameter("b_swat",true)
+  shzomb:SetThink(function() return SignalEnder(shzomb) end, "b_swat", 1.5)
+      function SignalEnder(shzomb)
+        shzomb:SetGraphParameterBool("b_swat",false)
+        return nil
       end 
-  
-  thisunit:SetHealth(thisunitmaxhealth)
+  shzomb:SetHealth(MaxHealth)
   heals = heals - 1
-  healdelay = healdelay + 1
-  --print(heals)
-    
+  healdelay = healdelay + 5
 end
 
+
+
+function SpawnHP()
+  if i == 1 then                                                              --defaults are from campaign+ may not be only vanilla values
+    if Difficulty == 3 then shzomb:SetHealth(100) MaxHealth = 100 i = 2 end --default is 80
+    if Difficulty == 2 then shzomb:SetHealth(100) MaxHealth = 100 i = 2 end --default is 80
+    if Difficulty == 1 then shzomb:SetHealth(72)  MaxHealth = 70 i = 2 end --default is 56
+    if Difficulty == 0 then shzomb:SetHealth(36) MaxHealth = 45 i = 2 end --default is 24
+  end 
+end
