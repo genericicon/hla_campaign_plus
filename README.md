@@ -1,6 +1,8 @@
 # hla_campaign_plus
 These are prefabs and associated files that were used in the campaign_plus addon
-
+.vmaps were added as of 1/19/2021 
+  - To get these maps to load in as extensions make sure to add them to your addon's map extensions list.
+  - I will create a guide to do this shortly
 How to use:
 Drag the "maps", "models", "resourcemanifests", "soundevents", and "sounds" folders into your addon folder in the content directory
 "steamapps\common\Half-Life Alyx\content\hlvr_addons\YOUR ADDON NAME HERE"
