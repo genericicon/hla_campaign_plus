@@ -71,7 +71,7 @@ function CheckWoundedStatus()                                                   
         end
         table.sort(sorted,function(a,b) return a[2] < b[2] end)
         for _, v in ipairs(sorted) do
-            print(v[1])
+            --print(v[1])
             uni = tonumber(v[1])
             
             --print(uni)
