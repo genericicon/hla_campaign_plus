@@ -21,45 +21,52 @@ function AnimTagListener( sTagName, nStatus)
 end
 function SHOOT()
     Soldier = Entities:FindByClassnameNearest("npc_combine_s",thisEntity:GetAbsOrigin(),10)
-    GoalActive = Soldier:NpcNavGoalActive()
-    Injured = Soldier:GetGraphParameter("b_injured")
-   -- print(GoalActive)
-    if GoalActive == true and Injured == false then 
-        SoldierFoundEnemy()
+    if Soldier ~= nil then
+        GoalActive = Soldier:NpcNavGoalActive()
+        Injured = Soldier:GetGraphParameter("b_injured")
+    -- print(GoalActive)
+        if GoalActive == true and Injured == false then 
+            SoldierFoundEnemy()
+        else
+
+        end
     else
-    end
+        thisEntity:StopThink("SHOOT")
+        end
     return .125
 end
 
 function SoldierFoundEnemy()
     if roundcounter >= 0 then
        -- print(roundcounter)
-        player = Entities:GetLocalPlayer()
+        player = Entities:FindByClassnameWithin(nil,"player",thisEntity:GetAbsOrigin(),1024)
         --print(player)
-        local SoldierEyeOrigin = Soldier:EyePosition() 
-        local traceTable = 
-        {
-            startpos = SoldierEyeOrigin;
-            endpos = player:EyePosition();
-            ent = player;
-            ignore = ChestArmor;
-        }
+        if player ~= nil then
+            local SoldierEyeOrigin = Soldier:EyePosition() 
+            local traceTable = 
+            {
+                startpos = SoldierEyeOrigin;
+                endpos = player:EyePosition();
+                ent = player;
+                ignore = ChestArmor;
+            }
 
-        TraceLine(traceTable)
-        if traceTable.enthit == player then
-            Soldier:SetGraphLookTarget(player:GetCenter())
-           -- DebugDrawLine(traceTable.startpos,traceTable.pos,0,255,0,false,1)
-           -- DebugDrawLine(traceTable.pos, traceTable.pos + traceTable.normal * 10, 0, 0, 255, false, 1)
-          --  print("foundvalidline")
-            Soldier:SetGraphParameterBool("b_firing",true)
-            --Soldier:SetGraphParameterBool("b_looktarget_can_use_path",false)
-            Shooting = Soldier:GetGraphParameter("b_firing")
-            if Shooting == true then
-                roundcounter = roundcounter - 1 
+            TraceLine(traceTable)
+            if traceTable.enthit == player then
+                Soldier:SetGraphLookTarget(player:GetCenter())
+            -- DebugDrawLine(traceTable.startpos,traceTable.pos,0,255,0,false,1)
+            -- DebugDrawLine(traceTable.pos, traceTable.pos + traceTable.normal * 10, 0, 0, 255, false, 1)
+            --  print("foundvalidline")
+                Soldier:SetGraphParameterBool("b_firing",true)
+                --Soldier:SetGraphParameterBool("b_looktarget_can_use_path",false)
+                Shooting = Soldier:GetGraphParameter("b_firing")
+                if Shooting == true then
+                    roundcounter = roundcounter - 1 
+                end
+            else
+            -- DebugDrawLine(traceTable.startpos, traceTable.endpos, 255, 0, 0, false, 1)    
+            -- print("linenotvalid")
             end
-        else
-           -- DebugDrawLine(traceTable.startpos, traceTable.endpos, 255, 0, 0, false, 1)    
-           -- print("linenotvalid")
         end
         
     else 

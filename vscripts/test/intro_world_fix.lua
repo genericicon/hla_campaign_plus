@@ -23,7 +23,7 @@ end
 
 
 function ChangeLevel ()
-    print("removed")
+    --print("removed")
     SendToConsole("addon_play a1_intro_world_2")
     
 end

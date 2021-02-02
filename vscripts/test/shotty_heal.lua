@@ -94,7 +94,7 @@ function CheckArmorType()
   function NeckArmorHit()
     Neckhits = Neckhits + 1
     --print("hit Neck")
-    if Neckhits == 15 and NeckArmor ~= nil then
+    if Neckhits == 10 and NeckArmor ~= nil then
       EntFireByHandle(self,NeckArmor,"Kill")
       SetStagger()
     end
@@ -107,7 +107,7 @@ function CheckArmorType()
   function ArmorArmRight1Hit()
     ArmorArmRight1Hits = ArmorArmRight1Hits + 1
     --print("hit Rarmup")
-    if ArmorArmRight1Hits == 15 and ArmorArmRight1 ~= nil then
+    if ArmorArmRight1Hits == 10 and ArmorArmRight1 ~= nil then
       EntFireByHandle(self,ArmorArmRight1,"Kill")
       SetStagger()
     end
@@ -120,7 +120,7 @@ function CheckArmorType()
   function ArmorArmRight2Hit()
     ArmorArmRight2Hits = ArmorArmRight2Hits + 1
     --print("hit Rarmlow")
-    if ArmorArmRight2Hits == 15 and ArmorArmRight2 ~= nil then
+    if ArmorArmRight2Hits == 10 and ArmorArmRight2 ~= nil then
       EntFireByHandle(self,ArmorArmRight2,"Kill")
       SetStagger()
     end
@@ -132,7 +132,7 @@ function CheckArmorType()
   function ArmorArmLeft1Hit()
     ArmorArmLeft1Hits = ArmorArmLeft1Hits + 1
     --print("hit Larmup")
-    if ArmorArmLeft1Hits == 15 and ArmorArmLeft1 ~= nil then
+    if ArmorArmLeft1Hits == 10 and ArmorArmLeft1 ~= nil then
       EntFireByHandle(self,ArmorArmLeft1,"Kill")
       SetStagger()
     end
@@ -145,7 +145,7 @@ function CheckArmorType()
   function ArmorArmLeft2hit()
     ArmorArmLeft2Hits = ArmorArmLeft2Hits + 1
     --print("hit larmlow")
-    if ArmorArmLeft2Hits == 15 and ArmorArmLeft2 ~= nil then
+    if ArmorArmLeft2Hits == 10 and ArmorArmLeft2 ~= nil then
       EntFireByHandle(self,ArmorArmLeft2,"Kill")
       SetStagger()
     end
@@ -179,7 +179,7 @@ function CheckArmorType()
   function Thigh1SideArmorHit()
     Thigh1SideArmorHits = Thigh1SideArmorHits + 1
     --print("hit thighside")
-    if Thigh1SideArmorHits == 15 and Thigh1SideArmor ~= nil then
+    if Thigh1SideArmorHits == 10 and Thigh1SideArmor ~= nil then
       EntFireByHandle(self,Thigh1SideArmor,"Kill")
       SetStagger()
     end
@@ -191,7 +191,7 @@ function CheckArmorType()
   function Thigh2SideArmorHit()
     Thigh2SideArmorHits = Thigh2SideArmorHits + 1
     --print("hit thighside")
-    if Thigh2SideArmorHits == 15 and Thigh2SideArmor ~= nil then
+    if Thigh2SideArmorHits == 10 and Thigh2SideArmor ~= nil then
       EntFireByHandle(self,Thigh2SideArmor,"Kill")
       SetStagger()
     end
@@ -205,7 +205,7 @@ end
 function ChestArmorHit()
   Chesthits = Chesthits + 1
   --print("hit chest")
-  if Chesthits == 15 and ChestArmor ~= nil then
+  if Chesthits == 10 and ChestArmor ~= nil then
     EntFireByHandle(self,ChestArmor,"Kill")
     SetStagger()
   end
@@ -215,7 +215,7 @@ function HeadArmorHit()
   if HeadBox ~= nil then
     Headhits = Headhits + 1
     --print("hit head")
-    if Headhits == 15 and HeadArmor ~= nil then
+    if Headhits == 10 and HeadArmor ~= nil then
       EntFireByHandle(self,HeadArmor,"Skin","3",0)
       EntFireByHandle(self,HeadArmor,"DisableCollision","3",0)
       EntFireByHandle(self,HeadBox,"Kill")
@@ -227,7 +227,7 @@ end
 function Knee1ArmorHit()
   Knee1hits = Knee1hits + 1
   --print("hit knee1")
-  if Knee1hits == 15 and Knee1Armor ~= nil then
+  if Knee1hits == 10 and Knee1Armor ~= nil then
     EntFireByHandle(self,Knee1Armor,"Kill")
 
     SetStagger()
@@ -237,7 +237,7 @@ end
 function Knee2ArmorHit()
   --print("hit knee2")
   Knee2hits = Knee2hits + 1
-  if Knee2hits == 15 and Knee2Armor ~= nil then
+  if Knee2hits == 10 and Knee2Armor ~= nil then
     EntFireByHandle(self,Knee2Armor,"Kill")
  
     SetStagger()
@@ -246,7 +246,7 @@ end
 function Thigh1ArmorHit()
  -- print("hit Thigh1")
   Thigh1hits = Thigh1hits + 1
-  if Thigh1hits == 15 and Thigh1Armor ~= nil then
+  if Thigh1hits == 10 and Thigh1Armor ~= nil then
     EntFireByHandle(self,Thigh1Armor,"Kill")
  
     SetStagger()
@@ -256,7 +256,7 @@ end
 function Thigh2ArmorHit()
   --print("hit Thigh2")
   Thigh2hits = Thigh2hits + 1
-  if Thigh2hits == 15 and Thigh2Armor ~= nil then
+  if Thigh2hits == 10 and Thigh2Armor ~= nil then
     EntFireByHandle(self,Thigh2Armor,"Kill")
     SetStagger()
   end

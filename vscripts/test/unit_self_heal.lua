@@ -112,7 +112,7 @@ end
 function ChestArmorHit()
   Chesthits = Chesthits + 1
  -- print("hit chest")
-  if Chesthits == 15 and ChestArmor ~= nil then
+  if Chesthits == 10 and ChestArmor ~= nil then
     EntFireByHandle(self,ChestArmor,"Skin","3",0)
     EntFireByHandle(self,ChestArmor,"DisableCollision","3",0)
     SetStagger()
@@ -123,7 +123,7 @@ function HeadArmorHit()
   if HeadBox ~= nil then
     Headhits = Headhits + 1
    -- print("hit head")
-    if Headhits == 15 and HeadArmor ~= nil then
+    if Headhits == 10 and HeadArmor ~= nil then
       EntFireByHandle(self,HeadArmor,"Skin","3",0)
       EntFireByHandle(self,HeadArmor,"DisableCollision","3",0)
       EntFireByHandle(self,HeadBox,"Kill")
@@ -135,7 +135,7 @@ end
 function Knee1ArmorHit()
   Knee1hits = Knee1hits + 1
  -- print("hit knee1")
-  if Knee1hits == 15 and Knee1Armor ~= nil then
+  if Knee1hits == 10 and Knee1Armor ~= nil then
     EntFireByHandle(self,Knee1Armor,"Skin","3",0)
     EntFireByHandle(self,Knee1Armor,"DisableCollision","3",0)
     SetStagger()
@@ -145,7 +145,7 @@ end
 function Knee2ArmorHit()
   --print("hit knee2")
   Knee2hits = Knee2hits + 1
-  if Knee2hits == 15 and Knee2Armor ~= nil then
+  if Knee2hits == 10 and Knee2Armor ~= nil then
     EntFireByHandle(self,Knee2Armor,"Skin","3",0)
     EntFireByHandle(self,Knee2Armor,"DisableCollision","3",0)
     SetStagger()
@@ -154,7 +154,7 @@ end
 function Thigh1ArmorHit()
  -- print("hit Thigh1")
   Thigh1hits = Thigh1hits + 1
-  if Thigh1hits == 15 and Thigh1Armor ~= nil then
+  if Thigh1hits == 10 and Thigh1Armor ~= nil then
     EntFireByHandle(self,Thigh1Armor,"Skin","3",0,Player)
     EntFireByHandle(self,Thigh1Armor,"DisableCollision","3",0,Player)
     SetStagger()
@@ -164,7 +164,7 @@ end
 function Thigh2ArmorHit()
  -- print("hit Thigh2")
   Thigh2hits = Thigh2hits + 1
-  if Thigh2hits == 15 and Thigh2Armor ~= nil then
+  if Thigh2hits == 10 and Thigh2Armor ~= nil then
     EntFireByHandle(self,Thigh2Armor,"Skin","3",0,Player)
     EntFireByHandle(self,Thigh2Armor,"DisableCollision","3",0,Player)
     SetStagger()
@@ -174,7 +174,7 @@ end
 function StomArmorHit()
   --print("hit STOM")
   StomArmorhits = StomArmorhits + 1
-  if StomArmorhits == 15 and StomArmor ~= nil then
+  if StomArmorhits == 10 and StomArmor ~= nil then
     EntFireByHandle(self,StomArmor,"Skin","3",0,Player)
     EntFireByHandle(self,StomArmor,"DisableCollision","3",0,Player)
     SetStagger()

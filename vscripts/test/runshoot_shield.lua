@@ -34,32 +34,34 @@ end
 function SoldierFoundEnemy()
     if roundcounter >= 0 then
        -- print(roundcounter)
-        player = Entities:GetLocalPlayer()
+        player = Entities:FindByClassnameWithin(nil,"player",thisEntity:GetAbsOrigin(),1024)
         --print(player)
-        local SoldierEyeOrigin = Soldier:EyePosition() 
-        local traceTable = 
-        {
-            startpos = SoldierEyeOrigin;
-            endpos = player:EyePosition();
-            ent = player;
-            ignore = Shield;
-        }
+        if player ~= nil then
+            local SoldierEyeOrigin = Soldier:EyePosition() 
+            local traceTable = 
+            {
+                startpos = SoldierEyeOrigin;
+                endpos = player:EyePosition();
+                ent = player;
+                ignore = ChestArmor;
+            }
 
-        TraceLine(traceTable)
-        if traceTable.enthit == player then
-            Soldier:SetGraphLookTarget(player:GetCenter())
-           -- DebugDrawLine(traceTable.startpos,traceTable.pos,0,255,0,false,1)
-           -- DebugDrawLine(traceTable.pos, traceTable.pos + traceTable.normal * 10, 0, 0, 255, false, 1)
-          --  print("foundvalidline")
-            Soldier:SetGraphParameterBool("b_firing",true)
-            --Soldier:SetGraphParameterBool("b_looktarget_can_use_path",false)
-            Shooting = Soldier:GetGraphParameter("b_firing")
-            if Shooting == true then
-                roundcounter = roundcounter - 1 
+            TraceLine(traceTable)
+            if traceTable.enthit == player then
+                Soldier:SetGraphLookTarget(player:GetCenter())
+            -- DebugDrawLine(traceTable.startpos,traceTable.pos,0,255,0,false,1)
+            -- DebugDrawLine(traceTable.pos, traceTable.pos + traceTable.normal * 10, 0, 0, 255, false, 1)
+            --  print("foundvalidline")
+                Soldier:SetGraphParameterBool("b_firing",true)
+                --Soldier:SetGraphParameterBool("b_looktarget_can_use_path",false)
+                Shooting = Soldier:GetGraphParameter("b_firing")
+                if Shooting == true then
+                    roundcounter = roundcounter - 1 
+                end
+            else
+            -- DebugDrawLine(traceTable.startpos, traceTable.endpos, 255, 0, 0, false, 1)    
+            -- print("linenotvalid")
             end
-        else
-           -- DebugDrawLine(traceTable.startpos, traceTable.endpos, 255, 0, 0, false, 1)    
-           -- print("linenotvalid")
         end
         
     else 
@@ -70,7 +72,6 @@ function SoldierFoundEnemy()
         function ReloadTimer() Soldier:SetGraphParameterBool("b_reload", false) return nil end  
     end
 end
-
 
 
 function AddEntityOutput (requestingEntity, outputEntity, outputName, outputTargetEntity, action, parameter, delay, fireOnce)
