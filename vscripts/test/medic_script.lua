@@ -1,6 +1,5 @@
 --Last script was an absolute mess, so hopefully this one is a bit better
 require "test/getDifficulty"
-
 local UnitsToHeal = {}
 local medic
 local maxHealth
@@ -11,16 +10,27 @@ local bShouldRun
 local flNavGoalTolerance
 local flDisttoNPC
 local flMinNpcDist
+local Chesthits = 0
+local Headhits = 0
+local Knee1hits = 0
+local Knee2hits = 0
+local Thigh1hits = 0
+local Thigh2hits = 0
+local StomArmorhits = 0
+local Soldier
+local player
+local roundcounter = 65
 
 function Spawn()
     thisEntity:SetContextThink(nil, MedicGoHeal, 0)
+    thisEntity:SetThink(ArmorHits,"ArmorHits",0)
 end
 
 function MedicGoHeal()
     GetMedic()
     if medic:IsAlive() == true then 
         GetUnitsToHeal()
-    return .1
+    return 4
     else 
     thisEntity:StopThink("MedicGoHeal")
     end
@@ -71,7 +81,7 @@ function CheckWoundedStatus()                                                   
         end
         table.sort(sorted,function(a,b) return a[2] < b[2] end)
         for _, v in ipairs(sorted) do
-            --print(v[1])
+            print(v[1])
             uni = tonumber(v[1])
             
             --print(uni)
@@ -109,8 +119,8 @@ end
 
 function MedicHeal(NPCNAME)                                                                             -- Medic heals npc, signals it is healing, healed npc is taken out of injured state if originally injured.
     medic:SetGraphParameterBool("b_signal",true)
-    NPCNAME:SetHealth(NPCNAME:GetHealth() + (NPCNAME:GetMaxHealth()-NPCNAME:GetHealth()) *.8)
-
+    NPCNAME:SetHealth(NPCNAME:GetHealth() + 40)
+    OpenPack()
     NPCNAME:SetGraphParameterBool("b_injured",false)
     medic:EmitSound("healthstation.complete")
     medic:SetThink(function() return SignalEnder(unitmedic) end, "signal", 5)
@@ -120,5 +130,147 @@ function MedicHeal(NPCNAME)                                                     
     end           
 end
 
+function ArmorHits()
+  CheckArmorType()
+end
+
+function CheckArmorType()
+  Player = Entities:GetLocalPlayer()
+  ChestArmor = Entities:FindByModelWithin(nil,"models/pl_armor_chest.vmdl",thisEntity:GetAbsOrigin(),72)
+  if ChestArmor ~= nil then
+    AddEntityOutput(Player, ChestArmor, "OnTakeDamage", thisEntity, "CallScriptFunction","ChestArmorHit", 0, false)
+  end
+  
+  HeadArmor = Entities:FindByModelWithin(nil,"models/pl_head.vmdl",thisEntity:GetAbsOrigin(),72)
+  HeadBox = Entities:FindByModelWithin(nil,"models/armor_headhitbox.vmdl",thisEntity:GetAbsOrigin(),72)
+  if HeadBox ~= nil then
+    AddEntityOutput(Player, HeadBox, "OnTakeDamage", thisEntity, "CallScriptFunction","HeadArmorHit", 0, false)
+  end
+ 
+  Knee1Armor = Entities:FindByModelWithin(nil,"models/pl_armor_knee_r.vmdl",thisEntity:GetAbsOrigin(),72)
+  if Knee1Armor ~= nil then
+    AddEntityOutput(Player, Knee1Armor, "OnTakeDamage", thisEntity, "CallScriptFunction","Knee1ArmorHit", 0, false)
+  end
+  Knee2Armor = Entities:FindByModelWithin(nil,"models/pl_armor_knee_l.vmdl",thisEntity:GetAbsOrigin(),72)
+  if Knee2Armor ~= nil then
+    AddEntityOutput(Player, Knee2Armor, "OnTakeDamage", thisEntity, "CallScriptFunction","Knee2ArmorHit", 0, false)
+  end
+  Thigh1Armor = Entities:FindByModelWithin(nil,"models/pl_armor_thigh_r.vmdl",thisEntity:GetAbsOrigin(),72)
+  if Thigh1Armor ~= nil then
+    AddEntityOutput(Player, Thigh1Armor, "OnTakeDamage", thisEntity, "CallScriptFunction","Thigh1ArmorHit", 0, false)
+  end
+  Thigh2Armor = Entities:FindByModelWithin(nil,"models/pl_armor_thigh_l.vmdl",thisEntity:GetAbsOrigin(),72)
+  if Thigh2Armor ~= nil then
+    AddEntityOutput(Player, Thigh2Armor, "OnTakeDamage", thisEntity, "CallScriptFunction","Thigh2ArmorHit", 0, false)
+  end
+  StomArmor = Entities:FindByModelWithin(nil,"models/pl_armor_stom.vmdl",thisEntity:GetAbsOrigin(),72)
+  if StomArmor ~= nil then  
+    AddEntityOutput(Player, StomArmor, "OnTakeDamage", thisEntity, "CallScriptFunction","StomArmorHit", 0, false)
+  end
+end
+
+function ChestArmorHit()
+  Chesthits = Chesthits + 1
+  --print("hit chest")
+  if Chesthits == 15 and ChestArmor ~= nil then
+    EntFireByHandle(self,ChestArmor,"Skin","3",0)
+    EntFireByHandle(self,ChestArmor,"DisableCollision","3",0)
+    SetStagger()
+  end
+end
+
+function HeadArmorHit()
+  if HeadBox ~= nil then
+    Headhits = Headhits + 1
+   -- print("hit head")
+    if Headhits == 15 and HeadArmor ~= nil then
+      EntFireByHandle(self,HeadArmor,"Skin","3",0)
+      EntFireByHandle(self,HeadArmor,"DisableCollision","3",0)
+      EntFireByHandle(self,HeadBox,"Kill")
+      SetStagger()
+    end
+  end
+end
+
+function Knee1ArmorHit()
+  Knee1hits = Knee1hits + 1
+ -- print("hit knee1")
+  if Knee1hits == 15 and Knee1Armor ~= nil then
+    EntFireByHandle(self,Knee1Armor,"Skin","3",0)
+    EntFireByHandle(self,Knee1Armor,"DisableCollision","3",0)
+    SetStagger()
+  end
+end
+
+function Knee2ArmorHit()
+ -- print("hit knee2")
+  Knee2hits = Knee2hits + 1
+  if Knee2hits == 15 and Knee2Armor ~= nil then
+    EntFireByHandle(self,Knee2Armor,"Skin","3",0)
+    EntFireByHandle(self,Knee2Armor,"DisableCollision","3",0)
+    SetStagger()
+  end
+end
+function Thigh1ArmorHit()
+--  print("hit Thigh1")
+  Thigh1hits = Thigh1hits + 1
+  if Thigh1hits == 15 and Thigh1Armor ~= nil then
+    EntFireByHandle(self,Thigh1Armor,"Skin","3",0,Player)
+    EntFireByHandle(self,Thigh1Armor,"DisableCollision","3",0,Player)
+    SetStagger()
+  end
+end
+
+function Thigh2ArmorHit()
+  --print("hit Thigh2")
+  Thigh2hits = Thigh2hits + 1
+  if Thigh2hits == 15 and Thigh2Armor ~= nil then
+    EntFireByHandle(self,Thigh2Armor,"Skin","3",0,Player)
+    EntFireByHandle(self,Thigh2Armor,"DisableCollision","3",0,Player)
+    SetStagger()
+  end
+end
+
+function StomArmorHit()
+ -- print("hit STOM")
+  StomArmorhits = StomArmorhits + 1
+  if StomArmorhits == 15 and StomArmor ~= nil then
+    EntFireByHandle(self,StomArmor,"Skin","3",0,Player)
+    EntFireByHandle(self,StomArmor,"DisableCollision","3",0,Player)
+    SetStagger()
+  end
+end
+
+function AddEntityOutput (requestingEntity, outputEntity, outputName, outputTargetEntity, action, parameter, delay, fireOnce)
+  parameter = parameter or ""
+  delay = delay or 0
+  fireOnce = fireOnce or false
+  local maxTimesToFire = -1 if (fireOnce) then maxTimesToFire = 1 end
+  local target = outputTargetEntity:GetName()
+
+  if target ~= nil then
+      local output = outputName ..">".. target ..">".. action ..">".. parameter ..">".. delay ..">".. maxTimesToFire
+      EntFireByHandle(requestingEntity, outputEntity, "AddOutput", output)
+  end
+end
 
 
+
+
+
+
+function SetStagger()
+  thisEntity:SetGraphParameterEnum("e_stagger",math.random(2,12))
+end
+
+function OpenPack()
+  Pack = Entities:FindByModelWithin(nil,"models/props_combine/combine_consoles/combine_monitor_medium.vmdl",medic:GetAbsOrigin(),100)
+  if Pack ~= nil then
+    Pack:SetSequence("open")
+    Pack:SetThink(function() return PackClose(pack) end, "close", 5)
+    function PackClose()
+        Pack:SetSequence("close")
+        return nil
+    end   
+  end
+end
