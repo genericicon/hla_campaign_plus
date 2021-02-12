@@ -21,14 +21,19 @@ function AnimTagListener( sTagName, nStatus)
 end
 function SHOOT()
     Soldier = Entities:FindByClassnameNearest("npc_combine_s",thisEntity:GetAbsOrigin(),10)
-    GoalActive = Soldier:NpcNavGoalActive()
-    Injured = Soldier:GetGraphParameter("b_injured")
-   -- print(GoalActive)
-    if GoalActive == true and Injured == false then 
-        SoldierFoundEnemy()
+    if Soldier ~= nil then
+        GoalActive = Soldier:NpcNavGoalActive()
+        Injured = Soldier:GetGraphParameter("b_injured")
+    -- print(GoalActive)
+        if GoalActive == true and Injured == false then 
+            SoldierFoundEnemy()
+        else
+
+        end
     else
-    end
-    return .125
+        thisEntity:StopThink("SHOOT")
+        end
+    return 4
 end
 
 function SoldierFoundEnemy()

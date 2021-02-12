@@ -2,6 +2,7 @@ local Soldier
 local player
 local roundcounter = 65
 local GoalActive = false
+local Shooting
 function Activate()
     --print("shoot")
     thisEntity:SetThink(SHOOT,"SHOOT",0)
@@ -33,7 +34,7 @@ function SHOOT()
     else
         thisEntity:StopThink("SHOOT")
         end
-    return .125
+    return 4
 end
 
 function SoldierFoundEnemy()
